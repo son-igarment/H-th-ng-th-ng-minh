@@ -470,3 +470,231 @@ body {
   text-align: center;
   font-size: 0.9rem;
 }
+
+/* Dashboard Styles */
+.dashboard-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #121212;
+  overflow: hidden;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1565C0;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.dashboard-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar Styles */
+.dashboard-sidebar {
+  width: 250px;
+  background-color: #121212;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #333;
+}
+
+.sidebar-header {
+  background-color: #004d2b;
+  color: white;
+  padding: 15px 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+}
+
+.date-info {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 5px;
+}
+
+.sidebar-item {
+  padding: 15px 20px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #333;
+}
+
+.sidebar-item:hover {
+  background-color: #333;
+}
+
+.sidebar-item.active {
+  background-color: #1565C0;
+}
+
+/* Main Content Styles */
+.dashboard-main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #121212;
+}
+
+.report-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.report-title {
+  color: #64B5F6;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.report-date-info {
+  color: #64B5F6;
+  margin-bottom: 20px;
+}
+
+/* Table Styles */
+.stock-table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #121212;
+  color: white;
+  border: 1px solid #333;
+}
+
+.stock-table th, .stock-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #333;
+}
+
+.stock-table th {
+  background-color: #333;
+  font-weight: bold;
+  color: white;
+}
+
+.stock-table tr:hover {
+  background-color: #1a1a1a;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.profit {
+  color: #4CAF50;
+}
+
+.loss {
+  color: #F44336;
+}
+
+.highlight {
+  color: #2196F3;
+}
+
+.risk-level.high {
+  color: #F44336;
+}
+
+.risk-level.medium {
+  color: #FF9800;
+}
+
+.risk-level.low {
+  color: #4CAF50;
+}
+
+/* Asset Report Specific Styles */
+.sidebar-item.assets-active {
+  background-color: #1976D2;
+}
+
+.report-title {
+  color: #64B5F6;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* Fixing table alignment for asset report */
+.stock-table td.value-col, 
+.stock-table th.value-col {
+  text-align: right;
+}
+
+/* Ensuring NAV and Cash rows are properly highlighted */
+.stock-table td.highlight {
+  color: #2196F3;
+  font-weight: bold;
+}
+
+/* Research and Development Styles */
+.research-sidebar {
+  width: 250px;
+  background-color: #1565C0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #2980b9;
+}
+
+.research-header {
+  background-color: #1565C0;
+  color: white;
+  padding: 15px 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #2980b9;
+}
+
+.research-sidebar .sidebar-item {
+  background-color: #1976D2;
+  color: white;
+  border-bottom: 1px solid #2980b9;
+}
+
+.research-sidebar .sidebar-item:hover {
+  background-color: #1565C0;
+}
+
+.research-sidebar .sidebar-item.active {
+  background-color: #1565C0;
+}
+
+.research-main {
+  background-color: #121212;
+  padding: 20px;
+}
+
+.empty-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.empty-content p {
+  color: #999;
+  font-size: 1.2rem;
+  text-align: center;
+}

@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import ForgotPassword from './ForgotPassword';
+import Dashboard from './Dashboard';
 import './App.css';
 
 function Login({ onGoBack }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('hiennx');
+  const [password, setPassword] = useState('******');
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetNotification, setResetNotification] = useState('');
+  const [showDashboard, setShowDashboard] = useState(false);
 
   const handleLogin = () => {
-    // Handle login logic here
-    console.log('Login attempt with:', username, password);
+    // In a real app, this would validate the credentials
+    if (username.trim() !== '' && password.trim() !== '') {
+      setShowDashboard(true);
+    }
   };
 
   const handleForgotPasswordClick = (e) => {
@@ -29,8 +33,16 @@ function Login({ onGoBack }) {
     // Clear notification after 5 seconds
     setTimeout(() => {
       setResetNotification('');
-    }, 5000);
+    }, 1000);
   };
+
+  const handleCloseDashboard = () => {
+    setShowDashboard(false);
+  };
+
+  if (showDashboard) {
+    return <Dashboard onClose={handleCloseDashboard} />;
+  }
 
   if (showForgotPassword) {
     return <ForgotPassword onGoBack={handleBackFromForgot} onSendSuccess={handleResetSuccess} />;

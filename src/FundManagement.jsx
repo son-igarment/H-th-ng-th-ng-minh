@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
 import Login from './Login';
+import Research from './Research';
 import './App.css';
 
 function FundManagement({ onClose }) {
   const [showLogin, setShowLogin] = useState(false);
+  const [showResearch, setShowResearch] = useState(false);
   
   const handleFundManagement = () => {
     setShowLogin(true);
   };
   
+  const handleResearch = () => {
+    setShowResearch(true);
+  };
+  
   const handleGoBack = () => {
     setShowLogin(false);
   };
+
+  const handleCloseResearch = () => {
+    setShowResearch(false);
+  };
+
+  if (showResearch) {
+    return <Research onClose={handleCloseResearch} />;
+  }
 
   if (showLogin) {
     return <Login onGoBack={handleGoBack} />;
@@ -38,7 +52,7 @@ function FundManagement({ onClose }) {
           <h2>Choose your department</h2>
           <div className="department-buttons">
             <button className="fund-management-btn" onClick={handleFundManagement}>FUND MANAGEMENT</button>
-            <button className="research-btn">RESEARCH AND DEVELOPMENT</button>
+            <button className="research-btn" onClick={handleResearch}>RESEARCH AND DEVELOPMENT</button>
           </div>
         </div>
       </div>
