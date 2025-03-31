@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import AssetReport from './AssetReport';
+import AnalystReport from './AnalystReport';
+import AnalystTool from './AnalystTool';
+import NotificationCenter from './NotificationCenter';
+import NotificationSection from './NotificationSection';
 import './App.css';
 
 function Dashboard({ onClose }) {
@@ -21,6 +25,18 @@ function Dashboard({ onClose }) {
 
   if (activeMenu === 'assets') {
     return <AssetReport onClose={onClose} onMenuChange={handleMenuChange} />;
+  }
+  
+  if (activeMenu === 'analyst') {
+    return <AnalystReport onClose={onClose} onMenuChange={handleMenuChange} />;
+  }
+
+  if (activeMenu === 'tool') {
+    return <AnalystTool onClose={onClose} onMenuChange={handleMenuChange} />;
+  }
+  
+  if (activeMenu === 'notification') {
+    return <NotificationCenter onClose={onClose} onMenuChange={handleMenuChange} />;
   }
 
   return (
@@ -53,6 +69,16 @@ function Dashboard({ onClose }) {
             Analyst report
           </div>
           
+          <div className={`sidebar-item ${activeMenu === 'tool' ? 'active' : ''}`}
+               onClick={() => handleMenuChange('tool')}>
+            Analyst tool
+          </div>
+          
+          <div className={`sidebar-item ${activeMenu === 'notification' ? 'active' : ''}`}
+               onClick={() => handleMenuChange('notification')}>
+            Notification center
+          </div>
+          
           <div className={`sidebar-item ${activeMenu === 'settings' ? 'active' : ''}`}
                onClick={() => handleMenuChange('settings')}>
             Settings
@@ -65,7 +91,7 @@ function Dashboard({ onClose }) {
             <h2 className="report-title">Daily Investment Report</h2>
             
             <div className="report-date-info">
-              Report date: {currentDate} - Lastest update date: {currentDate}.
+              Report date: <strong>{currentDate}</strong>. Lastest update date: <strong>{currentDate}</strong>.
             </div>
             
             <div className="stock-table-container">
@@ -84,22 +110,25 @@ function Dashboard({ onClose }) {
                 <tbody>
                   {stockData.map(stock => (
                     <tr key={stock.id}>
-                      <td className={stock.name === "NAV" || stock.name === "VN-Index" ? "highlight" : ""}>
+                      <td className={stock.name === "NAV" ? "highlight" : stock.name === "VN-Index" ? "yellow-highlight" : ""}>
                         {stock.name}
                       </td>
                       <td>{stock.industry}</td>
-                      <td className="text-right">{stock.cost.toFixed(3)}</td>
-                      <td className="text-right">{stock.price.toFixed(3)}</td>
-                      <td className={`text-right ${stock.profit.startsWith('+') ? 'profit' : 'loss'}`}>
+                      <td>{stock.cost.toFixed(3)}</td>
+                      <td>{stock.price.toFixed(3)}</td>
+                      <td className={stock.profit.startsWith('+') ? 'profit' : 'loss'}>
                         {stock.profit}
                       </td>
-                      <td className="text-right">{stock.beta}</td>
+                      <td>{stock.beta}</td>
                       <td className={`risk-level ${stock.risk.toLowerCase()}`}>{stock.risk}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+            
+            {/* Notification Section */}
+            <NotificationSection />
           </div>
         </div>
       </div>

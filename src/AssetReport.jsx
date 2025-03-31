@@ -1,4 +1,5 @@
 import React from 'react';
+import NotificationSection from './NotificationSection';
 import './App.css';
 
 function AssetReport({ onClose, onMenuChange }) {
@@ -39,6 +40,14 @@ function AssetReport({ onClose, onMenuChange }) {
             Analyst report
           </div>
           
+          <div className="sidebar-item" onClick={() => onMenuChange('tool')}>
+            Analyst tool
+          </div>
+          
+          <div className="sidebar-item" onClick={() => onMenuChange('notification')}>
+            Notification center
+          </div>
+          
           <div className="sidebar-item" onClick={() => onMenuChange('settings')}>
             Settings
           </div>
@@ -50,7 +59,7 @@ function AssetReport({ onClose, onMenuChange }) {
             <h2 className="report-title">Daily Net Value Asset Report</h2>
             
             <div className="report-date-info">
-              Report date: {currentDate} - Lastest update date: {currentDate}.
+              Report date: <strong>{currentDate}</strong>. Lastest update date: <strong>{currentDate}</strong>.
             </div>
             
             <div className="stock-table-container">
@@ -58,37 +67,40 @@ function AssetReport({ onClose, onMenuChange }) {
                 <thead>
                   <tr>
                     <th>Stock Name</th>
-                    <th className="value-col">Volume</th>
-                    <th className="value-col">Cur.Price</th>
-                    <th className="value-col">Cost</th>
-                    <th className="value-col">Cur.Price</th>
-                    <th className="value-col">Profit / Loss</th>
-                    <th className="value-col">Profit / Loss (%)</th>
-                    <th className="value-col">Weight</th>
+                    <th>Volume</th>
+                    <th>Cur.Price</th>
+                    <th>Cost</th>
+                    <th>Cur.Price</th>
+                    <th>Profit / Loss</th>
+                    <th>Profit / Loss (%)</th>
+                    <th>Weight</th>
                   </tr>
                 </thead>
                 <tbody>
                   {assetData.map(asset => (
                     <tr key={asset.id}>
-                      <td className={asset.name === "NAV" || asset.name === "Cash" ? "highlight" : ""}>
+                      <td className={asset.name === "NAV" ? "highlight" : asset.name === "Cash" ? "yellow-highlight" : ""}>
                         {asset.name}
                       </td>
-                      <td className="value-col">{asset.volume}</td>
-                      <td className="value-col">{asset.curPrice}</td>
-                      <td className="value-col">{asset.cost}</td>
-                      <td className="value-col">{asset.totalValue}</td>
-                      <td className={`value-col ${asset.profit.startsWith('+') ? 'profit' : 'loss'}`}>
+                      <td>{asset.volume}</td>
+                      <td>{asset.curPrice}</td>
+                      <td>{asset.cost}</td>
+                      <td>{asset.totalValue}</td>
+                      <td className={asset.profit.startsWith('+') ? 'profit' : 'loss'}>
                         {asset.profit}
                       </td>
-                      <td className={`value-col ${asset.profitPercent.startsWith('+') ? 'profit' : 'loss'}`}>
+                      <td className={asset.profitPercent.startsWith('+') ? 'profit' : 'loss'}>
                         {asset.profitPercent}
                       </td>
-                      <td className="value-col">{asset.weight}</td>
+                      <td>{asset.weight}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+            
+            {/* Notification Section */}
+            <NotificationSection />
           </div>
         </div>
       </div>
