@@ -598,6 +598,7 @@ body {
   font-weight: bold;
   color: black;
   text-align: center;
+  padding: 8px 10px;
 }
 
 .stock-table tr {
@@ -606,6 +607,15 @@ body {
 
 .stock-table tr:nth-child(even) {
   background-color: #181818;
+}
+
+.stock-table tr:nth-child(odd) {
+  background-color: #121212;
+}
+
+.stock-table td {
+  text-align: center;
+  padding: 8px 10px;
 }
 
 .stock-table td.highlight {
@@ -711,14 +721,14 @@ body {
 /* Research and Development Styles */
 .research-sidebar {
   width: 250px;
-  background-color: #1565C0;
+  background-color: #0D6EFD;
   display: flex;
   flex-direction: column;
   border-right: 1px solid #2980b9;
 }
 
 .research-header {
-  background-color: #1565C0;
+  background-color: #0D6EFD;
   color: white;
   padding: 15px 20px;
   font-weight: bold;
@@ -726,17 +736,18 @@ body {
 }
 
 .research-sidebar .sidebar-item {
-  background-color: #1976D2;
+  background-color: #0D6EFD;
   color: white;
   border-bottom: 1px solid #2980b9;
+  padding: 15px 20px;
 }
 
 .research-sidebar .sidebar-item:hover {
-  background-color: #1565C0;
+  background-color: #0A58CA;
 }
 
 .research-sidebar .sidebar-item.active {
-  background-color: #1565C0;
+  background-color: #084298;
 }
 
 .research-main {
@@ -1026,82 +1037,102 @@ body {
   text-align: right;
 }
 
-/* Analyst Tool Styles */
-.analyst-tool-section {
-  background-color: #121212;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 4px;
+/* Analyst Tool Styles - Updated for new layout */
+.analyst-tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
 }
 
-.filter-section {
-  margin-bottom: 15px;
-}
-
-.filter-label {
-  color: white;
-  font-size: 0.9rem;
+.report-title {
+  color: #FFD700;
+  font-size: 2.5rem;
+  margin: 0;
   font-weight: bold;
-  margin-bottom: 5px;
+  text-transform: uppercase;
 }
 
-.stock-input, .period-input {
-  background-color: white;
-  border: none;
-  padding: 10px 15px;
-  width: 100%;
-  max-width: 400px;
-  color: #333;
+.report-dates {
+  color: #00FFFF;
+  text-align: right;
   font-size: 1rem;
 }
 
-.chart-visualization {
-  margin-top: 20px;
-  background-color: #121212;
-  border: 1px solid #333;
-  padding: 10px;
-}
-
-.line-chart {
-  width: 100%;
-  height: 300px;
-  position: relative;
-}
-
-.chart-grid-line {
-  stroke: #333;
-  stroke-width: 1;
-}
-
-.chart-x-label, .chart-y-label {
-  fill: #999;
-  font-size: 0.7rem;
-}
-
-.chart-legend {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
+.report-dates div {
   margin-bottom: 5px;
 }
 
-.legend-color {
-  width: 15px;
-  height: 15px;
-  margin-right: 10px;
+.report-dates strong {
+  color: white;
 }
 
-.legend-label {
-  color: white;
-  font-size: 0.9rem;
+.ai-recommendations {
+  margin-top: 0;
+  background-color: white;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.ai-recommendation-item {
+  color: black;
+  padding: 5px 0;
+  font-size: 0.95rem;
+}
+
+.ai-agent {
+  color: #0000FF;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.purple-text {
+  color: #800080;
+  font-weight: normal;
+}
+
+.red-text {
+  color: #FF0000;
+  font-weight: normal;
+}
+
+.chart-container {
+  margin-top: 30px;
+  display: flex;
+}
+
+.chart-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 10px;
+  height: 300px;
+}
+
+.y-label {
+  color: #999;
+  font-size: 0.8rem;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.chart-plot {
+  flex: 1;
+  border: 1px solid #333;
+  position: relative;
+}
+
+.report-date-info {
+  display: flex;
+  justify-content: space-between;
+  color: #00FFFF;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.report-date, .update-date {
+  display: inline-block;
 }
 
 /* Notification Center Styles */
@@ -1135,4 +1166,270 @@ body {
 
 .notification-filter-btn.active:hover {
   background-color: #1565C0;
+}
+
+.chart-grid-line {
+  stroke: #333;
+  stroke-width: 1;
+}
+
+.chart-x-label {
+  fill: #999;
+  font-size: 0.7rem;
+}
+
+.analyst-controls-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.stock-control {
+  width: 48%;
+}
+
+.period-style-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.period-style-row .control-label {
+  width: auto;
+  margin-right: 15px;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.period-control {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.period-control .control-input {
+  width: 70%;
+}
+
+.control-label {
+  color: white;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.control-input {
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  border: none;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.start-analysis-btn {
+  background-color: #00C853;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  height: 40px;
+  font-size: 1rem;
+  letter-spacing: 4px;
+}
+
+.start-analysis-btn:hover {
+  background-color: #00A844;
+}
+
+/* Stock and Period Input Rows */
+.stock-row {
+  margin-bottom: 20px;
+}
+
+.period-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.period-group {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.period-group .control-label {
+  margin-right: 15px;
+  margin-bottom: 0;
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+.period-group .control-input {
+  flex: 1;
+  margin-right: 15px;
+  max-width: 300px;
+}
+
+.start-analysis-btn {
+  background-color: #00C853;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 25px;
+  font-weight: bold;
+  cursor: pointer;
+  height: 40px;
+  font-size: 1rem;
+  letter-spacing: 4px;
+}
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.report-dates {
+  color: #00FFFF;
+  text-align: right;
+  font-size: 1rem;
+}
+
+.report-dates div {
+  margin-bottom: 5px;
+}
+
+.report-dates strong {
+  color: white;
+}
+
+/* Research Department Login Styles */
+.research-department-header {
+  background-color: #0D6EFD;
+  color: white;
+  padding: 15px 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 1px solid #2980b9;
+}
+
+.research-department-header .date-info {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  font-weight: normal;
+}
+
+.login-box {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px 40px;
+  width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.login-box h2 {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+  text-align: center;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.notification {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.login-btn {
+  background-color: #00C853;
+  color: white;
+}
+
+.go-back-btn {
+  background-color: #FF3D00;
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: #00A844;
+}
+
+.go-back-btn:hover {
+  background-color: #E53600;
+}
+
+/* Security Classification Table Styles */
+.risk-level.very-high {
+  color: #FF0000;
+  font-weight: bold;
+}
+
+/* Training Model Report Styles */
+.model-report-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.model-report-left {
+  flex: 1;
+}
+
+.model-report-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.model-metrics-table th {
+  background-color: #121212 !important;
+  padding: 8px 15px;
+}
+
+.model-metrics-table td {
+  padding: 8px 15px;
+}
+
+.model-visualization {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.retrain-btn {
+  background-color: #00C853;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retrain-btn:hover {
+  background-color: #00A844;
 }

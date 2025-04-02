@@ -1,27 +1,42 @@
 import React, { useState } from 'react';
+import Login from './ResearchLogin';
+import TrainingModel from './TrainingModel';
 import './App.css';
 
 function Research({ onClose }) {
   const [activeMenu, setActiveMenu] = useState('dashboard');
+  const [showLogin, setShowLogin] = useState(true);
   
   const handleMenuChange = (menuItem) => {
     setActiveMenu(menuItem);
   };
+  
+  const handleLoginSuccess = () => {
+    setShowLogin(false);
+  };
+  
+  const handleGoBack = () => {
+    onClose();
+  };
+  
+  if (showLogin) {
+    return <Login onGoBack={handleGoBack} onLoginSuccess={handleLoginSuccess} department="research" />;
+  }
+
+  // Sample security classification data
+  const securityClassData = [
+    { date: "2025-03-28", acClass0: 51, acClass1: 133, acClass2: 305, acRisk: "Very High", prClass0: 50, prClass1: 128, prClass2: 314, prRisk: "Very High", acc: 0.9594 },
+    { date: "2025-03-27", acClass0: 52, acClass1: 146, acClass2: 254, acRisk: "Very High", prClass0: 51, prClass1: 145, prClass2: 285, prRisk: "Very High", acc: 0.9190 },
+    { date: "2025-03-26", acClass0: 54, acClass1: 154, acClass2: 274, acRisk: "Very High", prClass0: 56, prClass1: 155, prClass2: 271, prRisk: "Very High", acc: 0.9892 },
+    { date: "2025-03-25", acClass0: 55, acClass1: 155, acClass2: 272, acRisk: "Very High", prClass0: 57, prClass1: 156, prClass2: 269, prRisk: "Very High", acc: 0.9697 },
+    { date: "2025-03-24", acClass0: 58, acClass1: 152, acClass2: 262, acRisk: "Very High", prClass0: 59, prClass1: 168, prClass2: 255, prRisk: "Very High", acc: 0.9492 }
+  ];
 
   // Sample notification data
   const notifications = [
-    { id: 1, title: "Stock Prediction Alert", message: "ABC stock prediction model updated", time: "2 hours ago", read: false },
-    { id: 2, title: "Risk Assessment", message: "BCD stock risk level has increased", time: "4 hours ago", read: false },
-    { id: 3, title: "Data Mining Complete", message: "Historical data processed successfully", time: "Yesterday", read: true },
-    { id: 4, title: "Model Training", message: "ML model training completed with 94.5% accuracy", time: "2 days ago", read: true }
-  ];
-
-  // Sample prediction data
-  const predictionData = [
-    { id: 1, stock: "ABC", currentPrice: 20.00, predictedPrice: 21.50, change: "+7.50%", confidence: "High" },
-    { id: 2, stock: "BCD", currentPrice: 33.00, predictedPrice: 30.50, change: "-7.58%", confidence: "Medium" },
-    { id: 3, stock: "EFG", currentPrice: 50.00, predictedPrice: 54.25, change: "+8.50%", confidence: "High" },
-    { id: 4, stock: "XYZ", currentPrice: 15.75, predictedPrice: 16.20, change: "+2.86%", confidence: "Low" }
+    { id: 1, timestamp: "2024-03-28 17:00:05", message: "Database and training model has been updated. The accuracy is 0.9333. To see the visualization.", link: "Click here." },
+    { id: 2, timestamp: "2024-03-27 17:00:04", message: "Database and training model has been updated. The accuracy is 0.9190. To see the visualization.", link: null },
+    { id: 3, timestamp: "2024-03-26 17:00:02", message: "Database and training model has been updated. The accuracy is 0.9892. To see the visualization.", link: null }
   ];
 
   return (
@@ -34,8 +49,9 @@ function Research({ onClose }) {
       <div className="dashboard-content">
         {/* Sidebar Menu */}
         <div className="dashboard-sidebar research-sidebar">
-          <div className="sidebar-header research-header">
+          <div className="research-department-header">
             <div>Research and development department</div>
+            <div className="date-info">Current date: 2025-03-28</div>
           </div>
           
           <div className={`sidebar-item ${activeMenu === 'dashboard' ? 'active' : ''}`}
@@ -43,137 +59,102 @@ function Research({ onClose }) {
             Dashboard
           </div>
           
-          <div className={`sidebar-item ${activeMenu === 'updateData' ? 'active' : ''}`}
-               onClick={() => handleMenuChange('updateData')}>
-            Update data and model
+          <div className={`sidebar-item ${activeMenu === 'training' ? 'active' : ''}`}
+               onClick={() => handleMenuChange('training')}>
+            Training model
           </div>
           
-          <div className={`sidebar-item ${activeMenu === 'assessment' ? 'active' : ''}`}
-               onClick={() => handleMenuChange('assessment')}>
-            Assessment
+          <div className={`sidebar-item ${activeMenu === 'notification' ? 'active' : ''}`}
+               onClick={() => handleMenuChange('notification')}>
+            Notification center
           </div>
           
           <div className={`sidebar-item ${activeMenu === 'settings' ? 'active' : ''}`}
                onClick={() => handleMenuChange('settings')}>
             Settings
           </div>
-
         </div>
         
         {/* Main Content */}
         <div className="dashboard-main research-main">
-          {/* Content will depend on the selected menu item */}
           {activeMenu === 'dashboard' && (
             <div className="research-dashboard">
-              <h2 className="report-title">Research and Development Dashboard</h2>
+              <div className="report-header">
+                <h2 className="report-title">SECURITY CLASSIFICATION</h2>
+                <div className="report-dates">
+                  <div>Report date: 2025-03-28.</div>
+                  <div>Lastest update date: 2025-03-28.</div>
+                </div>
+              </div>
               
-              <div className="research-panels">
-                <div className="research-data-panel">
-                  <h3>Data Analysis Overview</h3>
-                  <div className="data-visualization">
-                    <div className="chart-container">
-                      <div className="chart-placeholder">
-                        <div className="chart-bars">
-                          {[40, 70, 55, 85, 30, 60, 75, 45, 65, 80].map((height, index) => (
-                            <div 
-                              key={index} 
-                              className="chart-bar" 
-                              style={{ height: `${height}%` }}
-                            ></div>
-                          ))}
-                        </div>
-                        <div className="chart-label">Stock Prediction Accuracy (%)</div>
-                      </div>
-                    </div>
-                    
-                    <div className="pie-charts">
-                      <div className="pie-chart">
-                        <div className="pie-chart-placeholder"></div>
-                        <div className="chart-label">Asset Distribution</div>
-                      </div>
-                      <div className="pie-chart">
-                        <div className="pie-chart-placeholder"></div>
-                        <div className="chart-label">Risk Analysis</div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="model-info">
-                    <div className="model-stat">
-                      <span className="stat-label">Prediction Models</span>
-                      <span className="stat-value">4 active</span>
-                    </div>
-                    <div className="model-stat">
-                      <span className="stat-label">Last Model Update</span>
-                      <span className="stat-value">Today, 09:45 AM</span>
-                    </div>
-                    <div className="model-stat">
-                      <span className="stat-label">Prediction Accuracy</span>
-                      <span className="stat-value">92.7%</span>
-                    </div>
-                  </div>
-                  
-                  <h3 className="section-title">Price Predictions (7-day forecast)</h3>
-                  <div className="prediction-table-container">
-                    <table className="prediction-table">
-                      <thead>
-                        <tr>
-                          <th>Stock</th>
-                          <th className="value-col">Current Price</th>
-                          <th className="value-col">Predicted Price</th>
-                          <th className="value-col">Predicted Change</th>
-                          <th>Confidence Level</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {predictionData.map(item => (
-                          <tr key={item.id}>
-                            <td>{item.stock}</td>
-                            <td className="value-col">{item.currentPrice.toFixed(2)}</td>
-                            <td className="value-col">{item.predictedPrice.toFixed(2)}</td>
-                            <td className={`value-col ${item.change.startsWith('+') ? 'profit' : 'loss'}`}>
-                              {item.change}
-                            </td>
-                            <td className={`confidence-${item.confidence.toLowerCase()}`}>
-                              {item.confidence}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                
-                <div className="notification-panel">
-                  <h3>Notifications</h3>
-                  <div className="notification-list">
-                    {notifications.map(notification => (
-                      <div key={notification.id} className={`notification-item ${notification.read ? 'read' : 'unread'}`}>
-                        <div className="notification-title">{notification.title}</div>
-                        <div className="notification-message">{notification.message}</div>
-                        <div className="notification-time">{notification.time}</div>
-                      </div>
+              {/* Security Classification Table */}
+              <div className="stock-table-container">
+                <table className="stock-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th style={{color: '#00FF00'}}>Ac.Class 0</th>
+                      <th style={{color: '#FFA500'}}>Ac.Class 1</th>
+                      <th style={{color: '#FF0000'}}>Ac.Class 2</th>
+                      <th>Ac.Risk</th>
+                      <th style={{color: '#00FF00'}}>Pr.Class 0</th>
+                      <th style={{color: '#FFA500'}}>Pr.Class 1</th>
+                      <th style={{color: '#FF0000'}}>Pr.Class 2</th>
+                      <th>Pr.Risk</th>
+                      <th>Acc</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {securityClassData.map((row, index) => (
+                      <tr key={index}>
+                        <td>{row.date}</td>
+                        <td style={{color: '#00FF00'}}>{row.acClass0}</td>
+                        <td style={{color: '#FFA500'}}>{row.acClass1}</td>
+                        <td style={{color: '#FF0000'}}>{row.acClass2}</td>
+                        <td className="risk-level very-high">{row.acRisk}</td>
+                        <td style={{color: '#00FF00'}}>{row.prClass0}</td>
+                        <td style={{color: '#FFA500'}}>{row.prClass1}</td>
+                        <td style={{color: '#FF0000'}}>{row.prClass2}</td>
+                        <td className="risk-level very-high">{row.prRisk}</td>
+                        <td>{row.acc}</td>
+                      </tr>
                     ))}
+                  </tbody>
+                </table>
+              </div>
+              
+              {/* Notification Section */}
+              <div className="notification-section">
+                <h3 className="notification-section-title">Notification</h3>
+                {notifications.map((notification) => (
+                  <div key={notification.id} className="notification-message">
+                    <div className="notification-row">
+                      <div className="notification-timestamp">{notification.timestamp}</div>
+                      <div className="notification-content">
+                        <span className="notification-source">AI agent:</span>
+                        {notification.message}
+                        {notification.link && (
+                          <span className="highlight-success"> {notification.link}</span>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           )}
           
-          {activeMenu === 'updateData' && (
+          {activeMenu === 'training' && (
             <div className="research-data">
-              <h2 className="report-title">Update Data and Model</h2>
-              <div className="empty-content">
-                <p>Data update tools will be displayed here</p>
-              </div>
+              <TrainingModel />
             </div>
           )}
           
-          {activeMenu === 'assessment' && (
+          {activeMenu === 'notification' && (
             <div className="research-assessment">
-              <h2 className="report-title">Assessment Tools</h2>
+              <h2 className="report-title">Notification Center</h2>
               <div className="empty-content">
-                <p>Assessment tools will be displayed here</p>
+                <p>Notification center will be displayed here</p>
               </div>
             </div>
           )}

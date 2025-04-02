@@ -88,10 +88,13 @@ function Dashboard({ onClose }) {
         {/* Main Content */}
         <div className="dashboard-main">
           <div className="report-container">
-            <h2 className="report-title">Daily Investment Report</h2>
-            
-            <div className="report-date-info">
-              Report date: <strong>{currentDate}</strong>. Lastest update date: <strong>{currentDate}</strong>.
+            <div className="report-header">
+              <h2 className="report-title">Daily Investment Report</h2>
+              
+              <div className="report-dates">
+                <div>Report date: <strong>{currentDate}</strong>.</div>
+                <div>Lastest update date: <strong>{currentDate}</strong>.</div>
+              </div>
             </div>
             
             <div className="stock-table-container">
